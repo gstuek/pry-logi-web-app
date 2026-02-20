@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-import { Plus, Pencil, ProhibitInset, Check, MagnifyingGlass, Funnel, Upload } from '@phosphor-icons/react';
+import { Plus, Pencil, ProhibitInset, Check, MagnifyingGlass, Funnel, Upload, DownloadSimple, FileArrowDown } from '@phosphor-icons/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -11,6 +11,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import {
   Table,
   TableBody,
@@ -26,6 +32,7 @@ import { useAuth } from '@/hooks/useAuth';
 import VehicleFormDialog from './VehicleFormDialog';
 import DataTablePagination from '../shared/DataTablePagination';
 import BulkImportDialog from './BulkImportDialog';
+import { downloadVehicleTemplate, exportVehiclesToCSV } from '@/lib/exportTemplates';
 
 export default function VehiclesTab() {
   const { t } = useTranslation();
@@ -195,18 +202,45 @@ export default function VehiclesTab() {
           </Select>
         </div>
 
-        {canEdit && (
-          <div className="flex gap-2 w-full sm:w-auto">
-            <Button onClick={() => setBulkImportOpen(true)} variant="outline" className="flex-1 sm:flex-initial">
-              <Upload className="mr-2" size={18} />
-              {t('common.bulkImport')}
-            </Button>
-            <Button onClick={handleAdd} className="flex-1 sm:flex-initial">
-              <Plus className="mr-2" size={18} />
-              {t('masterData.vehicle.add')}
-            </Button>
-          </div>
-        )}
+        <div className="flex gap-2 w-full sm:w-auto">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="flex-1 sm:flex-initial">
+                <DownloadSimple className="mr-2" size={18} />
+                {t('common.export')}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => {
+                downloadVehicleTemplate();
+                toast.success(t('common.templateDownloaded'));
+              }}>
+                <FileArrowDown className="mr-2" size={18} />
+                {t('common.downloadTemplate')}
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => {
+                exportVehiclesToCSV(vehicles);
+                toast.success(t('common.exportSuccess'));
+              }}>
+                <DownloadSimple className="mr-2" size={18} />
+                {t('common.exportData')}
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          
+          {canEdit && (
+            <>
+              <Button onClick={() => setBulkImportOpen(true)} variant="outline" className="flex-1 sm:flex-initial">
+                <Upload className="mr-2" size={18} />
+                {t('common.bulkImport')}
+              </Button>
+              <Button onClick={handleAdd} className="flex-1 sm:flex-initial">
+                <Plus className="mr-2" size={18} />
+                {t('masterData.vehicle.add')}
+              </Button>
+            </>
+          )}
+        </div>
       </div>
 
       <div className="border border-border rounded-lg overflow-hidden">

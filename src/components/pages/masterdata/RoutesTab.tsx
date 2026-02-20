@@ -22,6 +22,12 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -38,9 +44,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Plus, Pencil, Trash, MagnifyingGlass } from '@phosphor-icons/react';
+import { Plus, Pencil, Trash, MagnifyingGlass, DownloadSimple, FileArrowDown } from '@phosphor-icons/react';
 import { toast } from 'sonner';
 import { formatDate } from '@/lib/utils';
+import { downloadRouteTemplate, exportRoutesToCSV } from '@/lib/exportTemplates';
 
 interface Route {
   id: string;
@@ -209,16 +216,42 @@ export default function RoutesTab() {
             </SelectContent>
           </Select>
         </div>
-        <Button
-          onClick={() => {
-            resetForm();
-            setIsDialogOpen(true);
-          }}
-          className="w-full sm:w-auto"
-        >
-          <Plus size={18} className="mr-2" />
-          {t('masterData.route.add')}
-        </Button>
+        <div className="flex gap-2 w-full sm:w-auto">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="w-full sm:w-auto">
+                <DownloadSimple className="mr-2" size={18} />
+                {t('common.export')}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => {
+                downloadRouteTemplate();
+                toast.success(t('common.templateDownloaded'));
+              }}>
+                <FileArrowDown className="mr-2" size={18} />
+                {t('common.downloadTemplate')}
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => {
+                exportRoutesToCSV(routes || []);
+                toast.success(t('common.exportSuccess'));
+              }} disabled={!routes || routes.length === 0}>
+                <DownloadSimple className="mr-2" size={18} />
+                {t('common.exportData')}
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <Button
+            onClick={() => {
+              resetForm();
+              setIsDialogOpen(true);
+            }}
+            className="w-full sm:w-auto"
+          >
+            <Plus size={18} className="mr-2" />
+            {t('masterData.route.add')}
+          </Button>
+        </div>
       </div>
 
       <div className="border rounded-lg overflow-hidden">

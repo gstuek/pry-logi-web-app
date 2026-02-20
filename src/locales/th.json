@@ -31,7 +31,13 @@
     "page": "หน้า",
     "of": "จาก",
     "rowsPerPage": "แถวต่อหน้า",
-    "bulkImport": "นำเข้าข้อมูลจำนวนมาก"
+    "bulkImport": "นำเข้าข้อมูลจำนวนมาก",
+    "export": "ส่งออก",
+    "exportData": "ส่งออกข้อมูล",
+    "exportTemplate": "ส่งออกแม่แบบ",
+    "downloadTemplate": "ดาวน์โหลดแม่แบบ",
+    "exportSuccess": "ส่งออกข้อมูลสำเร็จ",
+    "templateDownloaded": "ดาวน์โหลดแม่แบบสำเร็จ"
   },
   "status": {
     "pending": "รอดำเนินการ",

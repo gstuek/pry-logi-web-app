@@ -31,7 +31,13 @@
     "page": "Page",
     "of": "of",
     "rowsPerPage": "Rows per page",
-    "bulkImport": "Bulk Import"
+    "bulkImport": "Bulk Import",
+    "export": "Export",
+    "exportData": "Export Data",
+    "exportTemplate": "Export Template",
+    "downloadTemplate": "Download Template",
+    "exportSuccess": "Data exported successfully",
+    "templateDownloaded": "Template downloaded successfully"
   },
   "status": {
     "pending": "Pending",
