@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-import { Plus, Pencil, ProhibitInset, Check, MagnifyingGlass, DownloadSimple, FileArrowDown } from '@phosphor-icons/react';
+import { Plus, Pencil, Trash, MagnifyingGlass, DownloadSimple, FileArrowDown } from '@phosphor-icons/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -26,10 +26,21 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { driversService, vehiclesService } from '@/lib/firestore';
 import { Driver, Vehicle, DriverStatus } from '@/types';
 import { useAuth } from '@/hooks/useAuth';
 import DataTablePagination from '../shared/DataTablePagination';
+import DriverFormDialog from './DriverFormDialog';
 import { downloadDriverTemplate, exportDriversToCSV } from '@/lib/exportTemplates';
 
 export default function DriversTab() {
@@ -41,6 +52,10 @@ export default function DriversTab() {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [editingDriver, setEditingDriver] = useState<Driver | null>(null);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [driverToDelete, setDriverToDelete] = useState<Driver | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 20;
 
@@ -100,6 +115,50 @@ export default function DriversTab() {
     );
   };
 
+  const handleAdd = () => {
+    setEditingDriver(null);
+    setDialogOpen(true);
+  };
+
+  const handleEdit = (driver: Driver) => {
+    if (!canEdit) {
+      toast.error(t('permissions.readOnly'));
+      return;
+    }
+    setEditingDriver(driver);
+    setDialogOpen(true);
+  };
+
+  const handleSave = async () => {
+    setDialogOpen(false);
+    await loadData();
+    toast.success(t('masterData.driver.saveSuccess'));
+  };
+
+  const handleDeleteClick = (driver: Driver) => {
+    if (!canEdit) {
+      toast.error(t('permissions.readOnly'));
+      return;
+    }
+    setDriverToDelete(driver);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!driverToDelete) return;
+
+    try {
+      await driversService.delete(driverToDelete.id);
+      await loadData();
+      toast.success(t('masterData.driver.deleteSuccess'));
+      setDeleteDialogOpen(false);
+      setDriverToDelete(null);
+    } catch (error) {
+      console.error('Error deleting driver:', error);
+      toast.error(t('masterData.driver.deleteError'));
+    }
+  };
+
   const getVehiclePlate = (vehicleId: string) => {
     const vehicle = vehicles.find(v => v.id === vehicleId);
     return vehicle ? vehicle.headPlate : '-';
@@ -145,6 +204,12 @@ export default function DriversTab() {
         </div>
 
         <div className="flex gap-2 w-full sm:w-auto">
+          {canEdit && (
+            <Button onClick={handleAdd} className="flex-1 sm:flex-initial">
+              <Plus className="mr-2" size={18} />
+              {t('masterData.driver.add')}
+            </Button>
+          )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="flex-1 sm:flex-initial">
@@ -182,12 +247,13 @@ export default function DriversTab() {
                 <TableHead>{t('masterData.driver.phone')}</TableHead>
                 <TableHead>{t('masterData.driver.assignedVehicle')}</TableHead>
                 <TableHead>{t('common.status')}</TableHead>
+                {canEdit && <TableHead className="text-right">{t('common.actions')}</TableHead>}
               </TableRow>
             </TableHeader>
             <TableBody>
               {paginatedDrivers.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center text-muted-foreground py-8">
+                  <TableCell colSpan={canEdit ? 6 : 5} className="text-center text-muted-foreground py-8">
                     {t('common.noData')}
                   </TableCell>
                 </TableRow>
@@ -199,6 +265,26 @@ export default function DriversTab() {
                     <TableCell>{driver.phone}</TableCell>
                     <TableCell>{getVehiclePlate(driver.assignedVehicleId)}</TableCell>
                     <TableCell>{getStatusBadge(driver.status)}</TableCell>
+                    {canEdit && (
+                      <TableCell className="text-right">
+                        <div className="flex items-center justify-end gap-2">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleEdit(driver)}
+                          >
+                            <Pencil size={16} />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleDeleteClick(driver)}
+                          >
+                            <Trash size={16} />
+                          </Button>
+                        </div>
+                      </TableCell>
+                    )}
                   </TableRow>
                 ))
               )}
@@ -213,6 +299,32 @@ export default function DriversTab() {
         itemsPerPage={rowsPerPage}
         onPageChange={setCurrentPage}
       />
+
+      {dialogOpen && (
+        <DriverFormDialog
+          driver={editingDriver}
+          open={dialogOpen}
+          onClose={() => setDialogOpen(false)}
+          onSave={handleSave}
+        />
+      )}
+
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t('masterData.driver.deleteConfirmTitle')}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {t('masterData.driver.deleteConfirmMessage', { name: driverToDelete?.name })}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDeleteConfirm}>
+              {t('common.delete')}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
