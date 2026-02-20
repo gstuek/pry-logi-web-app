@@ -83,3 +83,33 @@ export interface Part {
   unit: string;
   description: string;
 }
+
+export type JobStatus = 'draft' | 'confirmed' | 'in-transit' | 'delivered' | 'invoiced' | 'payment-received';
+
+export interface Job {
+  id: string;
+  jobNumber: string;
+  customerId: string;
+  customerName?: string;
+  startDate: Date;
+  pickupDate: Date;
+  deliveryDate: Date;
+  pickupLocation: string;
+  deliveryLocation: string;
+  vehicleId: string;
+  vehicleDisplay?: string;
+  driverId: string;
+  driverName?: string;
+  baseRate: number;
+  perKmRate: number;
+  estimatedDistance?: number;
+  estimatedDuration?: string;
+  revenue: number;
+  shippingCost: number;
+  margin: number;
+  notes: string;
+  status: JobStatus;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: string;
+}

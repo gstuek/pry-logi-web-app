@@ -163,5 +163,65 @@
   "permissions": {
     "readOnly": "คุณมีสิทธิ์ดูข้อมูลเท่านั้น",
     "noAccess": "คุณไม่มีสิทธิ์เข้าถึงข้อมูลนี้"
+  },
+  "jobs": {
+    "title": "จัดการงาน",
+    "add": "เพิ่มงาน",
+    "edit": "แก้ไขงาน",
+    "detail": "รายละเอียดงาน",
+    "jobNumber": "หมายเลขงาน",
+    "customer": "ลูกค้า",
+    "startDate": "วันที่เริ่มงาน",
+    "pickupDate": "วันที่รับของ",
+    "deliveryDate": "วันที่ส่งของ",
+    "pickupLocation": "สถานที่รับของ",
+    "deliveryLocation": "สถานที่ส่งของ",
+    "vehicle": "ยานพาหนะ",
+    "driver": "พนักงานขับรถ",
+    "baseRate": "ค่าบริการพื้นฐาน (บาท)",
+    "perKmRate": "ค่าบริการต่อกม. (บาท)",
+    "estimatedDistance": "ระยะทางประมาณ (กม.)",
+    "estimatedDuration": "ระยะเวลาประมาณ",
+    "revenue": "รายรับ (บาท)",
+    "shippingCost": "ค่าขนส่ง (บาท)",
+    "margin": "กำไร (บาท)",
+    "notes": "หมายเหตุ",
+    "status": "สถานะ",
+    "outstanding": "ค้างชำระ (บาท)",
+    "aiEstimate": "ประมาณการเส้นทางด้วย AI",
+    "estimating": "กำลังคำนวณ...",
+    "exportToSheets": "ส่งออกไป Google Sheets",
+    "generateInvoice": "สร้างใบแจ้งหนี้",
+    "exportPDF": "ส่งออก PDF",
+    "selectCustomer": "เลือกลูกค้า",
+    "selectVehicle": "เลือกยานพาหนะ",
+    "selectDriver": "เลือกพนักงานขับรถ",
+    "statuses": {
+      "draft": "ร่าง",
+      "confirmed": "ยืนยันแล้ว",
+      "in-transit": "กำลังขนส่ง",
+      "delivered": "ส่งแล้ว",
+      "invoiced": "ออกใบแจ้งหนี้แล้ว",
+      "payment-received": "รับชำระเงินแล้ว"
+    },
+    "saveSuccess": "บันทึกงานสำเร็จ",
+    "saveError": "ไม่สามารถบันทึกงานได้",
+    "deleteSuccess": "ลบงานสำเร็จ",
+    "deleteError": "ไม่สามารถลบงานได้",
+    "confirmDelete": "คุณต้องการลบงานนี้หรือไม่?",
+    "validation": {
+      "deliveryAfterPickup": "วันที่ส่งของต้องมาหลังวันที่รับของ",
+      "vehicleBooked": "ยานพาหนะถูกจองในวันนี้แล้ว",
+      "driverBooked": "พนักงานขับรถถูกจองในวันนี้แล้ว"
+    }
+  },
+  "dashboard": {
+    "title": "แดชบอร์ด",
+    "totalJobs": "งานทั้งหมด (เดือนนี้)",
+    "outstandingBalance": "ยอดค้างชำระ",
+    "activeVehicles": "ยานพาหนะที่ใช้งาน",
+    "pendingInvoices": "ใบแจ้งหนี้ค้างชำระ",
+    "recentJobs": "งานล่าสุด",
+    "viewAll": "ดูทั้งหมด"
   }
 }

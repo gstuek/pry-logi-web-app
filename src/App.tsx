@@ -4,6 +4,7 @@ import { Toaster } from '@/components/ui/sonner';
 import LoginPage from '@/components/pages/LoginPage';
 import PlaceholderPage from '@/components/pages/PlaceholderPage';
 import MasterDataPage from '@/components/pages/masterdata/MasterDataPage';
+import JobsPage from '@/components/pages/jobs/JobsPage';
 import MainLayout from '@/components/layout/MainLayout';
 import '@/lib/i18n';
 
@@ -47,7 +48,7 @@ function App() {
       case '/dashboard':
         return <PlaceholderPage titleKey="dashboard" />;
       case '/jobs':
-        return <PlaceholderPage titleKey="jobs" />;
+        return <JobsPage />;
       case '/tracking':
         return <PlaceholderPage titleKey="tracking" />;
       case '/invoices':
