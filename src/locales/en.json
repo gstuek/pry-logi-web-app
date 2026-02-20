@@ -19,13 +19,27 @@
     "search": "Search",
     "loading": "Loading...",
     "logout": "Logout",
-    "login": "Login"
+    "login": "Login",
+    "actions": "Actions",
+    "confirm": "Confirm",
+    "close": "Close",
+    "filter": "Filter",
+    "all": "All",
+    "noData": "No Data",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page",
+    "of": "of",
+    "rowsPerPage": "Rows per page"
   },
   "status": {
     "pending": "Pending",
     "inProgress": "In Progress",
     "completed": "Completed",
-    "cancelled": "Cancelled"
+    "cancelled": "Cancelled",
+    "active": "Active",
+    "inactive": "Inactive",
+    "maintenance": "Maintenance"
   },
   "auth": {
     "signInWithGoogle": "Sign in with Google",
@@ -38,5 +52,116 @@
   "pages": {
     "underDevelopment": "Under Development",
     "comingSoon": "This feature is currently under development"
+  },
+  "masterData": {
+    "title": "Master Data",
+    "vehicles": "Vehicles",
+    "drivers": "Drivers",
+    "customers": "Customers",
+    "rates": "Rates",
+    "parts": "Parts/Categories",
+    "vehicle": {
+      "title": "Manage Vehicles",
+      "add": "Add Vehicle",
+      "edit": "Edit Vehicle",
+      "headPlate": "Head Plate",
+      "tailPlate": "Tail Plate",
+      "brand": "Brand",
+      "type": "Type",
+      "capacity": "Capacity (tons)",
+      "status": "Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "brands": {
+        "Hino": "Hino",
+        "PRY": "PRY",
+        "Other": "Other"
+      },
+      "saveSuccess": "Vehicle saved successfully",
+      "saveError": "Failed to save vehicle",
+      "deleteSuccess": "Vehicle deleted successfully",
+      "deleteError": "Failed to delete vehicle",
+      "confirmDeactivate": "Do you want to deactivate this vehicle?"
+    },
+    "driver": {
+      "title": "Manage Drivers",
+      "add": "Add Driver",
+      "edit": "Edit Driver",
+      "name": "Name",
+      "licenseNo": "License Number",
+      "phone": "Phone",
+      "assignedVehicle": "Assigned Vehicle",
+      "status": "Status",
+      "createdAt": "Created At",
+      "noVehicle": "Not Assigned",
+      "selectVehicle": "Select Vehicle",
+      "saveSuccess": "Driver saved successfully",
+      "saveError": "Failed to save driver",
+      "deleteSuccess": "Driver deleted successfully",
+      "deleteError": "Failed to delete driver"
+    },
+    "customer": {
+      "title": "Manage Customers",
+      "add": "Add Customer",
+      "edit": "Edit Customer",
+      "name": "Company Name",
+      "address": "Address",
+      "contactName": "Contact Name",
+      "phone": "Phone",
+      "email": "Email",
+      "paymentTermDays": "Payment Terms (days)",
+      "creditLimit": "Credit Limit (THB)",
+      "createdAt": "Created At",
+      "saveSuccess": "Customer saved successfully",
+      "saveError": "Failed to save customer",
+      "deleteSuccess": "Customer deleted successfully",
+      "deleteError": "Failed to delete customer"
+    },
+    "rate": {
+      "title": "Manage Rates",
+      "add": "Add Rate",
+      "edit": "Edit Rate",
+      "routeFrom": "From",
+      "routeTo": "To",
+      "vehicleType": "Vehicle Type",
+      "baseRate": "Base Rate (THB)",
+      "perKmRate": "Per KM Rate (THB)",
+      "surcharges": "Surcharges",
+      "effectiveDate": "Effective Date",
+      "createdBy": "Created By",
+      "addSurcharge": "Add Surcharge",
+      "surchargeName": "Surcharge Name",
+      "surchargeAmount": "Amount (THB)",
+      "saveSuccess": "Rate saved successfully",
+      "saveError": "Failed to save rate",
+      "deleteSuccess": "Rate deleted successfully",
+      "deleteError": "Failed to delete rate"
+    },
+    "part": {
+      "title": "Manage Parts/Categories",
+      "add": "Add Part",
+      "edit": "Edit Part",
+      "partName": "Part Name",
+      "category": "Category",
+      "unit": "Unit",
+      "description": "Description",
+      "saveSuccess": "Part saved successfully",
+      "saveError": "Failed to save part",
+      "deleteSuccess": "Part deleted successfully",
+      "deleteError": "Failed to delete part"
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email format",
+    "invalidPhone": "Invalid phone format",
+    "minValue": "Minimum value is",
+    "maxValue": "Maximum value is"
+  },
+  "permissions": {
+    "readOnly": "You have read-only access",
+    "noAccess": "You don't have access to this data"
   }
 }

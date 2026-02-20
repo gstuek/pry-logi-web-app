@@ -3,6 +3,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { Toaster } from '@/components/ui/sonner';
 import LoginPage from '@/components/pages/LoginPage';
 import PlaceholderPage from '@/components/pages/PlaceholderPage';
+import MasterDataPage from '@/components/pages/masterdata/MasterDataPage';
 import MainLayout from '@/components/layout/MainLayout';
 import '@/lib/i18n';
 
@@ -38,6 +39,10 @@ function App() {
   }
 
   const renderPage = () => {
+    if (currentPath.startsWith('/master-data')) {
+      return <MasterDataPage />;
+    }
+
     switch (currentPath) {
       case '/dashboard':
         return <PlaceholderPage titleKey="dashboard" />;
@@ -49,8 +54,6 @@ function App() {
         return <PlaceholderPage titleKey="invoices" />;
       case '/reports':
         return <PlaceholderPage titleKey="reports" />;
-      case '/master-data':
-        return <PlaceholderPage titleKey="masterData" />;
       case '/maintenance':
         return <PlaceholderPage titleKey="maintenance" />;
       case '/admin':
