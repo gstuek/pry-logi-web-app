@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useForm } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import {
+  Dialog
   Dialog,
-  DialogContent,
+import { Input }
   DialogHeader,
   DialogTitle,
   DialogFooter,
@@ -12,56 +12,56 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
+  onSave
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+  driver,
 import { driversService, vehiclesService } from '@/lib/firestore';
 import { Driver, DriverStatus, Vehicle } from '@/types';
 
-interface DriverFormDialogProps {
+
   driver: Driver | null;
-  open: boolean;
+    formState: {
   onClose: () => void;
   onSave: () => void;
 }
 
 interface DriverFormData {
-  name: string;
-  licenseNo: string;
-  phone: string;
-  assignedVehicleId: string;
-  status: DriverStatus;
-}
+  });
+  const selectedStat
 
-export default function DriverFormDialog({
-  driver,
-  open,
-  onClose,
-  onSave,
-}: DriverFormDialogProps) {
-  const { t } = useTranslation();
-  const [loading, setLoading] = useState(false);
-  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+    loadVehicles();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-    setValue,
-    watch,
-  } = useForm<DriverFormData>({
-    defaultValues: {
-      name: '',
-      licenseNo: '',
-      phone: '',
-      assignedVehicleId: '',
-      status: 'active',
-    },
+ 
+
+        phone: driver.phone,
+        s
+    } e
+        na
+        p
+        status: 'active',
+    }
+
+    try {
+
+      con
+  };
+  const onSubmit 
+    try {
+        aw
+        await
+          
+      }
+      onClose();
+      console.e
+    } finally {
+    }
+
+    <Dialog open={open}
+      
   });
 
   const selectedStatus = watch('status');
@@ -126,97 +126,97 @@ export default function DriverFormDialog({
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>
-            {driver ? t('masterData.driver.edit') : t('masterData.driver.add')}
-          </DialogTitle>
-        </DialogHeader>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">
-              {t('masterData.driver.name')} <span className="text-destructive">*</span>
-            </Label>
-            <Input
-              id="name"
-              {...register('name', { required: true })}
-              placeholder={t('masterData.driver.namePlaceholder')}
-            />
-            {errors.name && (
-              <p className="text-sm text-destructive">{t('validation.required')}</p>
-            )}
-          </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="licenseNo">
-              {t('masterData.driver.licenseNo')} <span className="text-destructive">*</span>
-            </Label>
-            <Input
-              id="licenseNo"
-              {...register('licenseNo', { required: true })}
-              placeholder={t('masterData.driver.licenseNoPlaceholder')}
-            />
-            {errors.licenseNo && (
-              <p className="text-sm text-destructive">{t('validation.required')}</p>
-            )}
-          </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="phone">
-              {t('masterData.driver.phone')} <span className="text-destructive">*</span>
-            </Label>
-            <Input
-              id="phone"
-              {...register('phone', { required: true })}
-              placeholder={t('masterData.driver.phonePlaceholder')}
-            />
-            {errors.phone && (
-              <p className="text-sm text-destructive">{t('validation.required')}</p>
-            )}
-          </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="assignedVehicleId">
-              {t('masterData.driver.assignedVehicle')}
-            </Label>
-            <Select value={selectedVehicle} onValueChange={(value) => setValue('assignedVehicleId', value)}>
-              <SelectTrigger>
-                <SelectValue placeholder={t('masterData.driver.selectVehicle')} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="">{t('common.none')}</SelectItem>
-                {vehicles.map((vehicle) => (
-                  <SelectItem key={vehicle.id} value={vehicle.id}>
-                    {vehicle.headPlate} - {vehicle.tailPlate}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="status">
-              {t('common.status')} <span className="text-destructive">*</span>
-            </Label>
-            <Select value={selectedStatus} onValueChange={(value: DriverStatus) => setValue('status', value)}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="active">{t('status.active')}</SelectItem>
-                <SelectItem value="inactive">{t('status.inactive')}</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
 
-          <DialogFooter>
-            <Button type="button" variant="outline" onClick={onClose} disabled={loading}>
-              {t('common.cancel')}
-            </Button>
-            <Button type="submit" disabled={loading}>
-              {loading ? t('common.saving') : t('common.save')}
-            </Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
-  );
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
