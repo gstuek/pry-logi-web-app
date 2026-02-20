@@ -1,0 +1,42 @@
+{
+  "appName": "LOGISTICS 360",
+  "nav": {
+    "dashboard": "หน้าหลัก",
+    "jobs": "งาน",
+    "tracking": "ติดตาม",
+    "invoices": "ใบแจ้งหนี้",
+    "reports": "รายงาน",
+    "masterData": "ข้อมูลหลัก",
+    "maintenance": "บำรุงรักษา",
+    "admin": "ตั้งค่า"
+  },
+  "common": {
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "add": "เพิ่ม",
+    "delete": "ลบ",
+    "edit": "แก้ไข",
+    "search": "ค้นหา",
+    "loading": "กำลังโหลด...",
+    "logout": "ออกจากระบบ",
+    "login": "เข้าสู่ระบบ"
+  },
+  "status": {
+    "pending": "รอดำเนินการ",
+    "inProgress": "กำลังดำเนินการ",
+    "completed": "เสร็จสิ้น",
+    "cancelled": "ยกเลิก"
+  },
+  "auth": {
+    "signInWithGoogle": "เข้าสู่ระบบด้วย Google",
+    "signInTitle": "เข้าสู่ระบบ PRY Logi",
+    "signInDescription": "ใช้บัญชี Google Workspace ของคุณเพื่อเข้าสู่ระบบ",
+    "loginSuccess": "เข้าสู่ระบบสำเร็จ",
+    "loginError": "ไม่สามารถเข้าสู่ระบบได้",
+    "logoutSuccess": "ออกจากระบบสำเร็จ"
+  },
+  "pages": {
+    "underDevelopment": "กำลังพัฒนา",
+    "comingSoon": "ฟีเจอร์นี้กำลังอยู่ระหว่างการพัฒนา"
+  }
+}

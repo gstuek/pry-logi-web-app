@@ -1,0 +1,42 @@
+{
+  "appName": "LOGISTICS 360",
+  "nav": {
+    "dashboard": "Dashboard",
+    "jobs": "Jobs",
+    "tracking": "Tracking",
+    "invoices": "Invoices",
+    "reports": "Reports",
+    "masterData": "Master Data",
+    "maintenance": "Maintenance",
+    "admin": "Settings"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "add": "Add",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "loading": "Loading...",
+    "logout": "Logout",
+    "login": "Login"
+  },
+  "status": {
+    "pending": "Pending",
+    "inProgress": "In Progress",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "auth": {
+    "signInWithGoogle": "Sign in with Google",
+    "signInTitle": "Sign in to PRY Logi",
+    "signInDescription": "Use your Google Workspace account to sign in",
+    "loginSuccess": "Login successful",
+    "loginError": "Unable to sign in",
+    "logoutSuccess": "Logged out successfully"
+  },
+  "pages": {
+    "underDevelopment": "Under Development",
+    "comingSoon": "This feature is currently under development"
+  }
+}
