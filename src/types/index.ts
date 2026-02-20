@@ -159,3 +159,60 @@ export interface Photo {
   uploadedAt: Date;
   deleteAt?: Date;
 }
+
+export type InvoiceStatus = 'unpaid' | 'partial' | 'paid';
+export type PaymentMethod = 'transfer' | 'check' | 'cash';
+
+export interface Invoice {
+  id: string;
+  invoiceNumber: string;
+  customerId: string;
+  customerName?: string;
+  customerAddress?: string;
+  customerPhone?: string;
+  jobIds: string[];
+  totalAmount: number;
+  paidAmount: number;
+  outstandingAmount: number;
+  status: InvoiceStatus;
+  issuedDate: Date;
+  dueDate: Date;
+  createdBy: string;
+  createdByName: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface InvoiceItem {
+  id: string;
+  invoiceId: string;
+  jobId: string;
+  jobNumber: string;
+  description: string;
+  pickupLocation: string;
+  deliveryLocation: string;
+  pickupDate: Date;
+  deliveryDate: Date;
+  amount: number;
+}
+
+export interface Payment {
+  id: string;
+  invoiceId: string;
+  amount: number;
+  paymentDate: Date;
+  paymentMethod: PaymentMethod;
+  notes?: string;
+  recordedBy: string;
+  recordedByName: string;
+  createdAt: Date;
+}
+
+export interface OutstandingBalance {
+  customerId: string;
+  customerName: string;
+  totalInvoiced: number;
+  totalPaid: number;
+  outstandingBalance: number;
+  invoiceCount: number;
+}

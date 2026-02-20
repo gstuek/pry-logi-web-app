@@ -2,7 +2,7 @@
 
 A comprehensive bilingual (Thai/English) logistics management web application for tracking shipments, managing jobs, invoicing, and generating reports with role-based access control.
 
-**Current Phase: Phase 4 - Tracking Module & Photo Upload (COMPLETED)**
+**Current Phase: Phase 5 - Invoices, Payments & Reports (COMPLETED)**
 
 **Experience Qualities**:
 1. **Professional** - Clean, organized interface that instills confidence in managing complex logistics operations

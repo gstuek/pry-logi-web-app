@@ -7,6 +7,8 @@ import MasterDataPage from '@/components/pages/masterdata/MasterDataPage';
 import JobsPage from '@/components/pages/jobs/JobsPage';
 import TrackingPage from '@/components/pages/tracking/TrackingPage';
 import TrackingDetailPage from '@/components/pages/tracking/TrackingDetailPage';
+import InvoicePage from '@/components/pages/invoices/InvoicePage';
+import ReportsPage from '@/components/pages/reports/ReportsPage';
 import MainLayout from '@/components/layout/MainLayout';
 import '@/lib/i18n';
 
@@ -59,9 +61,9 @@ function App() {
       case '/tracking':
         return <TrackingPage />;
       case '/invoices':
-        return <PlaceholderPage titleKey="invoices" />;
+        return <InvoicePage />;
       case '/reports':
-        return <PlaceholderPage titleKey="reports" />;
+        return <ReportsPage />;
       case '/maintenance':
         return <PlaceholderPage titleKey="maintenance" />;
       case '/admin':
