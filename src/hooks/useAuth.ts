@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { User as FirebaseUser, onAuthStateChanged, signInWithPopup, signOut as firebaseSignOut } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
-import { auth, db, googleProvider } from '@/lib/firebase';
+import { auth, db, googleProvider, isFirebaseConfigured } from '@/lib/firebase';
 import { User } from '@/types';
 
 export function useAuth() {
@@ -10,6 +10,19 @@ export function useAuth() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!isFirebaseConfigured) {
+      const demoUser = localStorage.getItem('demo_user');
+      if (demoUser) {
+        try {
+          setUser(JSON.parse(demoUser));
+        } catch (e) {
+          console.error('Error parsing demo user:', e);
+        }
+      }
+      setLoading(false);
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
         setFirebaseUser(firebaseUser);
@@ -52,6 +65,20 @@ export function useAuth() {
   }, []);
 
   const signInWithGoogle = async () => {
+    if (!isFirebaseConfigured) {
+      const demoUser: User = {
+        uid: 'demo-user-' + Date.now(),
+        name: 'Demo User',
+        email: 'demo@prylogi.com',
+        role: 'admin',
+        active: true,
+        createdAt: new Date(),
+      };
+      setUser(demoUser);
+      localStorage.setItem('demo_user', JSON.stringify(demoUser));
+      return { success: true };
+    }
+
     try {
       await signInWithPopup(auth, googleProvider);
       return { success: true };
@@ -62,6 +89,12 @@ export function useAuth() {
   };
 
   const signOut = async () => {
+    if (!isFirebaseConfigured) {
+      setUser(null);
+      localStorage.removeItem('demo_user');
+      return { success: true };
+    }
+
     try {
       await firebaseSignOut(auth);
       return { success: true };
