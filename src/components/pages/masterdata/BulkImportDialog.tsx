@@ -15,28 +15,13 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+import DataValidationPreview, { type ParsedRecord } from './DataValidationPreview';
 
 interface BulkImportDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   entityType: 'vehicles' | 'drivers' | 'customers' | 'routes' | 'rates';
   onImportComplete: () => void;
-}
-
-interface ParsedRecord {
-  originalData: Record<string, any>;
-  mappedData: Record<string, any>;
-  status: 'valid' | 'warning' | 'error';
-  issues: string[];
-  suggestions: string[];
 }
 
 interface AnalysisResult {
@@ -147,7 +132,17 @@ Important:
 - Suggest data corrections`;
 
       const result = await window.spark.llm(promptText, 'gpt-4o', true);
-      const analysis: AnalysisResult = JSON.parse(result);
+      const parsedResult: AnalysisResult = JSON.parse(result);
+      
+      const recordsWithIds = parsedResult.records.map((record, index) => ({
+        ...record,
+        id: `temp-${Date.now()}-${index}`,
+      }));
+      
+      const analysis: AnalysisResult = {
+        ...parsedResult,
+        records: recordsWithIds,
+      };
       
       setAnalysisResult(analysis);
       toast.success(`วิเคราะห์ข้อมูลสำเร็จ: ${analysis.validRecords}/${analysis.totalRecords} รายการถูกต้อง (Analysis complete: ${analysis.validRecords}/${analysis.totalRecords} valid)`);
@@ -350,10 +345,10 @@ Important:
               )}
             </div>
           ) : (
-            <Tabs defaultValue="summary" className="w-full">
+            <Tabs defaultValue="preview" className="w-full">
               <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="preview">แก้ไขข้อมูล (Edit Data)</TabsTrigger>
                 <TabsTrigger value="summary">สรุป (Summary)</TabsTrigger>
-                <TabsTrigger value="preview">ตัวอย่าง (Preview)</TabsTrigger>
                 <TabsTrigger value="issues">ปัญหา (Issues)</TabsTrigger>
               </TabsList>
 
@@ -400,45 +395,29 @@ Important:
               </TabsContent>
 
               <TabsContent value="preview">
-                <ScrollArea className="h-[400px]">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="w-12">สถานะ</TableHead>
-                        <TableHead>#</TableHead>
-                        {analysisResult.records[0] && 
-                          Object.keys(analysisResult.records[0].mappedData).map(key => (
-                            <TableHead key={key}>{key}</TableHead>
-                          ))}
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {analysisResult.records.map((record, index) => (
-                        <TableRow key={index}>
-                          <TableCell>
-                            {record.status === 'valid' && (
-                              <CheckCircle className="w-5 h-5 text-green-600" />
-                            )}
-                            {record.status === 'warning' && (
-                              <Warning className="w-5 h-5 text-yellow-600" />
-                            )}
-                            {record.status === 'error' && (
-                              <XCircle className="w-5 h-5 text-red-600" />
-                            )}
-                          </TableCell>
-                          <TableCell>{index + 1}</TableCell>
-                          {Object.values(record.mappedData).map((value, i) => (
-                            <TableCell key={i}>
-                              {typeof value === 'object' 
-                                ? JSON.stringify(value).slice(0, 30) + '...'
-                                : String(value)}
-                            </TableCell>
-                          ))}
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </ScrollArea>
+                <DataValidationPreview
+                  records={analysisResult.records}
+                  entityType={entityType}
+                  columnMapping={analysisResult.columnMapping}
+                  onRecordsUpdate={(updatedRecords) => {
+                    setAnalysisResult(prev => {
+                      if (!prev) return prev;
+                      
+                      const validCount = updatedRecords.filter(r => r.status === 'valid').length;
+                      const warningCount = updatedRecords.filter(r => r.status === 'warning').length;
+                      const errorCount = updatedRecords.filter(r => r.status === 'error').length;
+                      
+                      return {
+                        ...prev,
+                        records: updatedRecords,
+                        totalRecords: updatedRecords.length,
+                        validRecords: validCount,
+                        recordsWithWarnings: warningCount,
+                        recordsWithErrors: errorCount,
+                      };
+                    });
+                  }}
+                />
               </TabsContent>
 
               <TabsContent value="issues">
@@ -447,7 +426,7 @@ Important:
                     {analysisResult.records
                       .filter(r => r.issues.length > 0 || r.suggestions.length > 0)
                       .map((record, index) => (
-                        <div key={index} className="p-4 border rounded-lg">
+                        <div key={record.id} className="p-4 border rounded-lg">
                           <div className="flex items-center gap-2 mb-2">
                             <Badge variant={record.status === 'error' ? 'destructive' : 'secondary'}>
                               แถว {index + 1}
