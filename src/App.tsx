@@ -5,6 +5,8 @@ import LoginPage from '@/components/pages/LoginPage';
 import PlaceholderPage from '@/components/pages/PlaceholderPage';
 import MasterDataPage from '@/components/pages/masterdata/MasterDataPage';
 import JobsPage from '@/components/pages/jobs/JobsPage';
+import TrackingPage from '@/components/pages/tracking/TrackingPage';
+import TrackingDetailPage from '@/components/pages/tracking/TrackingDetailPage';
 import MainLayout from '@/components/layout/MainLayout';
 import '@/lib/i18n';
 
@@ -44,13 +46,18 @@ function App() {
       return <MasterDataPage />;
     }
 
+    if (currentPath.startsWith('/tracking/')) {
+      const jobId = currentPath.split('/')[2];
+      return <TrackingDetailPage jobId={jobId} />;
+    }
+
     switch (currentPath) {
       case '/dashboard':
         return <PlaceholderPage titleKey="dashboard" />;
       case '/jobs':
         return <JobsPage />;
       case '/tracking':
-        return <PlaceholderPage titleKey="tracking" />;
+        return <TrackingPage />;
       case '/invoices':
         return <PlaceholderPage titleKey="invoices" />;
       case '/reports':

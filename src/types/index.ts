@@ -109,7 +109,53 @@ export interface Job {
   margin: number;
   notes: string;
   status: JobStatus;
+  currentTrackingStep?: TrackingStep;
+  paymentReceivedDate?: Date;
   createdAt: Date;
   updatedAt: Date;
   createdBy: string;
+}
+
+export type TrackingStep = 
+  | 'created'
+  | 'confirmed'
+  | 'vehicle-assigned'
+  | 'pickup-scheduled'
+  | 'picked-up'
+  | 'in-transit'
+  | 'delivered'
+  | 'invoiced'
+  | 'payment-received';
+
+export type TrackingStepStatus = 'done' | 'current' | 'pending';
+
+export interface TrackingEvent {
+  id: string;
+  jobId: string;
+  step: TrackingStep;
+  stepNumber: number;
+  notes?: string;
+  updatedBy: string;
+  updatedByName: string;
+  timestamp: Date;
+  createdAt: Date;
+}
+
+export type PhotoFolder = 'workflow' | 'documents';
+export type DocumentType = 'invoice' | 'delivery-order' | 'proof-of-delivery';
+
+export interface Photo {
+  id: string;
+  jobId: string;
+  folder: PhotoFolder;
+  stepNumber?: number;
+  documentType?: DocumentType;
+  storagePath: string;
+  downloadUrl: string;
+  fileName: string;
+  fileSize: number;
+  uploadedBy: string;
+  uploadedByName: string;
+  uploadedAt: Date;
+  deleteAt?: Date;
 }

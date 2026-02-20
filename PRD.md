@@ -2,6 +2,8 @@
 
 A comprehensive bilingual (Thai/English) logistics management web application for tracking shipments, managing jobs, invoicing, and generating reports with role-based access control.
 
+**Current Phase: Phase 4 - Tracking Module & Photo Upload (COMPLETED)**
+
 **Experience Qualities**:
 1. **Professional** - Clean, organized interface that instills confidence in managing complex logistics operations
 2. **Efficient** - Quick navigation and clear information hierarchy that minimizes clicks and cognitive load for daily operations
@@ -46,6 +48,48 @@ A comprehensive bilingual (Thai/English) logistics management web application fo
 - **Trigger**: User clicks navigation item
 - **Progression**: Click nav item → Route changes → Page title displays → "กำลังพัฒนา/Under Development" message shown
 - **Success criteria**: Each route renders correctly; page titles display in current language; no broken links or 404 errors
+
+### 6. Tracking Module with Visual Timeline
+- **Functionality**: View all jobs with current tracking status; drill down to detailed tracking timeline with 9 workflow steps; visual progress indicator
+- **Purpose**: Provide real-time visibility into job progress for operations team and customers
+- **Trigger**: User navigates to /tracking; clicks job card; views timeline
+- **Progression**: Tracking list → Filter by status/vehicle → Click job → Timeline view → 9-step progress bar → View step details (timestamp, updated by, notes)
+- **Success criteria**: All jobs display with current step badge; timeline shows completed/current/pending states; filters work correctly; mobile responsive
+
+### 7. Status Update with Role-Based Access
+- **Functionality**: Ops/Admin/Manager can update job tracking status; add notes; select next workflow step
+- **Purpose**: Enable operations team to keep job status current and communicate progress
+- **Trigger**: User clicks "Update Status" button on tracking detail page
+- **Progression**: Click button → Dialog opens → Select next step → Add optional notes → Save → Timeline updates → Current step advances
+- **Success criteria**: Only authorized roles see update button; step validation prevents skipping; notes are persisted; timestamps recorded with user info
+
+### 8. Photo Upload per Tracking Step
+- **Functionality**: Upload up to 5 photos per workflow step; max 5MB per photo; stored in Firebase Storage organized by job/step
+- **Purpose**: Document job progress with visual evidence; proof of pickup, transit condition, delivery
+- **Trigger**: User clicks "Upload Photos" button on any completed or current tracking step
+- **Progression**: Click upload → File picker opens → Select photos (1-5) → Upload to Storage → Metadata saved to Firestore → Thumbnails display on step card
+- **Success criteria**: Photos upload successfully; file size enforced; thumbnails load; organized by step; deletable by authorized users
+
+### 9. Document Photo Upload
+- **Functionality**: Separate document upload section with three categories: Invoice, Delivery Order (DO), Proof of Delivery (POD)
+- **Purpose**: Store key business documents separate from workflow photos; easy access for finance and admin
+- **Trigger**: User navigates to Documents tab on tracking detail page; clicks upload on specific document type
+- **Progression**: Documents tab → Three cards (Invoice/DO/POD) → Click upload → Select files → Upload to documents folder → Display by type
+- **Success criteria**: Documents organized by type; multiple uploads per type allowed; accessible to all authenticated users; finance role can access all
+
+### 10. Auto-Delete with TTL
+- **Functionality**: When job reaches "Payment Received" status (step 9), automatically set deleteAt timestamp: +30 days for workflow photos, +90 days for documents
+- **Purpose**: Comply with data retention policies; automatically clean up storage; reduce storage costs
+- **Trigger**: Job status updated to "Payment Received"
+- **Progression**: Status update to step 9 → Query all workflow photos → Set deleteAt = now + 30 days → Query all document photos → Set deleteAt = now + 90 days → Save paymentReceivedDate
+- **Success criteria**: Firestore TTL deletes expired photo documents; Cloud Function triggers on document deletion; Storage file deleted; deletion logged
+
+### 11. Cloud Function Photo Cleanup
+- **Functionality**: Firebase Cloud Function triggered when photo document deleted by TTL; deletes corresponding Storage file; logs deletion
+- **Purpose**: Ensure Storage and Firestore stay in sync; prevent orphaned files; maintain audit trail
+- **Trigger**: Firestore photo document deleted (by TTL or manual)
+- **Progression**: Document deleted → Function triggered → Read storagePath → Delete file from Storage → Write deletion log → Complete
+- **Success criteria**: Function executes within 10 seconds; Storage file deleted successfully; deletion logged with reason/timestamp; errors logged for troubleshooting
 
 ## Edge Case Handling
 
