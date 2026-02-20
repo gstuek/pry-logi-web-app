@@ -58,6 +58,7 @@
     "vehicles": "Vehicles",
     "drivers": "Drivers",
     "customers": "Customers",
+    "routes": "Routes",
     "rates": "Rates",
     "parts": "Parts/Categories",
     "vehicle": {
@@ -151,6 +152,25 @@
       "saveError": "Failed to save part",
       "deleteSuccess": "Part deleted successfully",
       "deleteError": "Failed to delete part"
+    },
+    "route": {
+      "title": "Manage Routes",
+      "add": "Add Route",
+      "edit": "Edit Route",
+      "routeName": "Route Name",
+      "origin": "Origin",
+      "destination": "Destination",
+      "distance": "Distance (km)",
+      "estimatedDuration": "Estimated Duration (hrs)",
+      "notes": "Notes",
+      "status": "Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "saveSuccess": "Route saved successfully",
+      "saveError": "Failed to save route",
+      "deleteSuccess": "Route deleted successfully",
+      "deleteError": "Failed to delete route",
+      "confirmDelete": "Do you want to delete this route?"
     }
   },
   "validation": {
@@ -383,5 +403,65 @@
     "generateError": "Failed to generate report",
     "exportSuccess": "Export successful",
     "exportError": "Failed to export"
+  },
+  "admin": {
+    "title": "System Settings",
+    "users": "User Management",
+    "userManagement": {
+      "title": "User Management",
+      "add": "Add User",
+      "edit": "Edit User",
+      "inviteUser": "Invite User",
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "createdAt": "Created At",
+      "lastLogin": "Last Login",
+      "roles": {
+        "admin": "Admin",
+        "manager": "Manager",
+        "ops": "Operations",
+        "finance": "Finance",
+        "sales": "Sales"
+      },
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "saveSuccess": "User saved successfully",
+      "saveError": "Failed to save user",
+      "inviteSuccess": "Invitation sent successfully",
+      "inviteError": "Failed to send invitation",
+      "confirmDeactivate": "Do you want to deactivate this user?",
+      "confirmActivate": "Do you want to activate this user?"
+    },
+    "systemSettings": {
+      "title": "System Settings",
+      "companyName": "Company Name",
+      "currency": "Currency",
+      "timezone": "Timezone",
+      "saveSuccess": "Settings saved successfully",
+      "saveError": "Failed to save settings"
+    },
+    "auditLog": {
+      "title": "Audit Log",
+      "action": "Action",
+      "user": "User",
+      "module": "Module",
+      "timestamp": "Timestamp",
+      "details": "Details",
+      "actions": {
+        "create": "Create",
+        "update": "Update",
+        "delete": "Delete"
+      }
+    },
+    "storage": {
+      "title": "Storage Usage",
+      "used": "Used",
+      "available": "Available",
+      "total": "Total"
+    }
   }
 }

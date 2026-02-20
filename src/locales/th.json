@@ -55,11 +55,12 @@
   },
   "masterData": {
     "title": "ข้อมูลหลัก",
-    "vehicles": "ยานพาหนะ",
-    "drivers": "พนักงานขับรถ",
-    "customers": "ลูกค้า",
-    "rates": "อัตราค่าบริการ",
-    "parts": "อะไหล่/หมวดหมู่",
+    "vehicles": "ยานพาหนะ (Vehicles)",
+    "drivers": "พนักงานขับรถ (Drivers)",
+    "customers": "ลูกค้า (Customers)",
+    "routes": "เส้นทาง (Routes)",
+    "rates": "อัตราค่าบริการ (Rates)",
+    "parts": "อะไหล่/หมวดหมู่ (Parts)",
     "vehicle": {
       "title": "จัดการยานพาหนะ",
       "add": "เพิ่มยานพาหนะ",
@@ -151,6 +152,25 @@
       "saveError": "ไม่สามารถบันทึกอะไหล่ได้",
       "deleteSuccess": "ลบอะไหล่สำเร็จ",
       "deleteError": "ไม่สามารถลบอะไหล่ได้"
+    },
+    "route": {
+      "title": "จัดการเส้นทาง",
+      "add": "เพิ่มเส้นทาง",
+      "edit": "แก้ไขเส้นทาง",
+      "routeName": "ชื่อเส้นทาง",
+      "origin": "ต้นทาง",
+      "destination": "ปลายทาง",
+      "distance": "ระยะทาง (กม.)",
+      "estimatedDuration": "ระยะเวลาโดยประมาณ (ชม.)",
+      "notes": "หมายเหตุ",
+      "status": "สถานะ",
+      "createdAt": "วันที่สร้าง",
+      "updatedAt": "วันที่อัปเดต",
+      "saveSuccess": "บันทึกเส้นทางสำเร็จ",
+      "saveError": "ไม่สามารถบันทึกเส้นทางได้",
+      "deleteSuccess": "ลบเส้นทางสำเร็จ",
+      "deleteError": "ไม่สามารถลบเส้นทางได้",
+      "confirmDelete": "คุณต้องการลบเส้นทางนี้หรือไม่?"
     }
   },
   "validation": {
@@ -383,5 +403,65 @@
     "generateError": "ไม่สามารถสร้างรายงานได้",
     "exportSuccess": "ส่งออกสำเร็จ",
     "exportError": "ไม่สามารถส่งออกได้"
+  },
+  "admin": {
+    "title": "การตั้งค่าระบบ",
+    "users": "จัดการผู้ใช้ (User Management)",
+    "userManagement": {
+      "title": "จัดการผู้ใช้",
+      "add": "เพิ่มผู้ใช้",
+      "edit": "แก้ไขผู้ใช้",
+      "inviteUser": "เชิญผู้ใช้",
+      "name": "ชื่อ",
+      "email": "อีเมล",
+      "role": "บทบาท",
+      "status": "สถานะ",
+      "active": "ใช้งาน",
+      "inactive": "ไม่ใช้งาน",
+      "createdAt": "วันที่สร้าง",
+      "lastLogin": "เข้าสู่ระบบล่าสุด",
+      "roles": {
+        "admin": "ผู้ดูแลระบบ (Admin)",
+        "manager": "ผู้จัดการ (Manager)",
+        "ops": "ปฏิบัติการ (Operations)",
+        "finance": "การเงิน (Finance)",
+        "sales": "ฝ่ายขาย (Sales)"
+      },
+      "deactivate": "ปิดการใช้งาน",
+      "activate": "เปิดการใช้งาน",
+      "saveSuccess": "บันทึกผู้ใช้สำเร็จ",
+      "saveError": "ไม่สามารถบันทึกผู้ใช้ได้",
+      "inviteSuccess": "ส่งคำเชิญสำเร็จ",
+      "inviteError": "ไม่สามารถส่งคำเชิญได้",
+      "confirmDeactivate": "คุณต้องการปิดการใช้งานผู้ใช้นี้หรือไม่?",
+      "confirmActivate": "คุณต้องการเปิดการใช้งานผู้ใช้นี้หรือไม่?"
+    },
+    "systemSettings": {
+      "title": "ตั้งค่าระบบ",
+      "companyName": "ชื่อบริษัท",
+      "currency": "สกุลเงิน",
+      "timezone": "เขตเวลา",
+      "saveSuccess": "บันทึกการตั้งค่าสำเร็จ",
+      "saveError": "ไม่สามารถบันทึกการตั้งค่าได้"
+    },
+    "auditLog": {
+      "title": "บันทึกการใช้งาน",
+      "action": "การดำเนินการ",
+      "user": "ผู้ใช้",
+      "module": "โมดูล",
+      "timestamp": "เวลา",
+      "details": "รายละเอียด",
+      "actions": {
+        "create": "สร้าง",
+        "update": "แก้ไข",
+        "delete": "ลบ"
+      }
+    },
+    "storage": {
+      "title": "การใช้พื้นที่จัดเก็บข้อมูล",
+      "used": "ใช้ไปแล้ว",
+      "available": "ว่างอยู่",
+      "total": "ทั้งหมด"
+    }
   }
 }

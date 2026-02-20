@@ -9,6 +9,7 @@ import TrackingPage from '@/components/pages/tracking/TrackingPage';
 import TrackingDetailPage from '@/components/pages/tracking/TrackingDetailPage';
 import InvoicePage from '@/components/pages/invoices/InvoicePage';
 import ReportsPage from '@/components/pages/reports/ReportsPage';
+import AdminPage from '@/components/pages/AdminPage';
 import MainLayout from '@/components/layout/MainLayout';
 import '@/lib/i18n';
 
@@ -68,7 +69,7 @@ function App() {
         return <PlaceholderPage titleKey="maintenance" />;
       case '/admin':
         return user.role === 'admin' ? (
-          <PlaceholderPage titleKey="admin" />
+          <AdminPage />
         ) : (
           <PlaceholderPage titleKey="dashboard" />
         );

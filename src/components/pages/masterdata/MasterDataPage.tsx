@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import VehiclesTab from './VehiclesTab';
 import DriversTab from './DriversTab';
 import CustomersTab from './CustomersTab';
+import RoutesTab from './RoutesTab';
 import RatesTab from './RatesTab';
 import PartsTab from './PartsTab';
 
@@ -31,10 +32,11 @@ export default function MasterDataPage() {
 
       <div className="flex-1 overflow-auto px-6 py-6">
         <Tabs value={activeTab} onValueChange={handleTabChange}>
-          <TabsList className="grid w-full max-w-3xl grid-cols-5 mb-6">
+          <TabsList className="grid w-full max-w-4xl grid-cols-6 mb-6">
             <TabsTrigger value="vehicles">{t('masterData.vehicles')}</TabsTrigger>
             <TabsTrigger value="drivers">{t('masterData.drivers')}</TabsTrigger>
             <TabsTrigger value="customers">{t('masterData.customers')}</TabsTrigger>
+            <TabsTrigger value="routes">{t('masterData.routes')}</TabsTrigger>
             <TabsTrigger value="rates">{t('masterData.rates')}</TabsTrigger>
             <TabsTrigger value="parts">{t('masterData.parts')}</TabsTrigger>
           </TabsList>
@@ -49,6 +51,10 @@ export default function MasterDataPage() {
 
           <TabsContent value="customers">
             <CustomersTab />
+          </TabsContent>
+
+          <TabsContent value="routes">
+            <RoutesTab />
           </TabsContent>
 
           <TabsContent value="rates">
