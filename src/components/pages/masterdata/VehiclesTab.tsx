@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-import { Plus, Pencil, ProhibitInset, Check, MagnifyingGlass, Funnel } from '@phosphor-icons/react';
+import { Plus, Pencil, ProhibitInset, Check, MagnifyingGlass, Funnel, Upload } from '@phosphor-icons/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -25,6 +25,7 @@ import { Vehicle, VehicleBrand, VehicleStatus } from '@/types';
 import { useAuth } from '@/hooks/useAuth';
 import VehicleFormDialog from './VehicleFormDialog';
 import DataTablePagination from '../shared/DataTablePagination';
+import BulkImportDialog from './BulkImportDialog';
 
 export default function VehiclesTab() {
   const { t } = useTranslation();
@@ -37,6 +38,7 @@ export default function VehiclesTab() {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingVehicle, setEditingVehicle] = useState<Vehicle | null>(null);
+  const [bulkImportOpen, setBulkImportOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 20;
 
@@ -194,10 +196,16 @@ export default function VehiclesTab() {
         </div>
 
         {canEdit && (
-          <Button onClick={handleAdd} className="w-full sm:w-auto">
-            <Plus className="mr-2" size={18} />
-            {t('masterData.vehicle.add')}
-          </Button>
+          <div className="flex gap-2 w-full sm:w-auto">
+            <Button onClick={() => setBulkImportOpen(true)} variant="outline" className="flex-1 sm:flex-initial">
+              <Upload className="mr-2" size={18} />
+              {t('common.bulkImport')}
+            </Button>
+            <Button onClick={handleAdd} className="flex-1 sm:flex-initial">
+              <Plus className="mr-2" size={18} />
+              {t('masterData.vehicle.add')}
+            </Button>
+          </div>
         )}
       </div>
 
@@ -280,6 +288,13 @@ export default function VehiclesTab() {
           onSave={handleSave}
         />
       )}
+
+      <BulkImportDialog
+        open={bulkImportOpen}
+        onOpenChange={setBulkImportOpen}
+        entityType="vehicles"
+        onImportComplete={loadVehicles}
+      />
     </div>
   );
 }

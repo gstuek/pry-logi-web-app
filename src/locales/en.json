@@ -30,7 +30,8 @@
     "next": "Next",
     "page": "Page",
     "of": "of",
-    "rowsPerPage": "Rows per page"
+    "rowsPerPage": "Rows per page",
+    "bulkImport": "Bulk Import"
   },
   "status": {
     "pending": "Pending",

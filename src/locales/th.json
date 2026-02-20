@@ -30,7 +30,8 @@
     "next": "ถัดไป",
     "page": "หน้า",
     "of": "จาก",
-    "rowsPerPage": "แถวต่อหน้า"
+    "rowsPerPage": "แถวต่อหน้า",
+    "bulkImport": "นำเข้าข้อมูลจำนวนมาก"
   },
   "status": {
     "pending": "รอดำเนินการ",
