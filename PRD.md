@@ -2,7 +2,7 @@
 
 A comprehensive bilingual (Thai/English) logistics management web application for tracking shipments, managing jobs, invoicing, and generating reports with role-based access control.
 
-**Current Phase: Phase 5 - Invoices, Payments & Reports (COMPLETED)**
+**Current Phase: Phase 6 - Complete System with Dashboard & Bilingual UI (COMPLETED)**
 
 **Experience Qualities**:
 1. **Professional** - Clean, organized interface that instills confidence in managing complex logistics operations
@@ -43,11 +43,11 @@ A comprehensive bilingual (Thai/English) logistics management web application fo
 - **Success criteria**: All navigation items visible and clickable; smooth transitions; mobile-friendly collapse behavior; active route highlighted
 
 ### 5. Module Placeholder Pages
-- **Functionality**: Eight core module pages (Dashboard, Jobs, Tracking, Invoices, Reports, Master Data, Maintenance, Admin) with "under development" placeholders
-- **Purpose**: Establish navigation structure and routing foundation for future development phases
+- **Functionality**: Eight core module pages - Dashboard (fully implemented with KPIs and recent jobs table), Jobs, Tracking, Invoices, Reports, Master Data (including Routes), Maintenance, Admin (with User Management)
+- **Purpose**: Provide complete navigation structure with working dashboard and all major features implemented
 - **Trigger**: User clicks navigation item
-- **Progression**: Click nav item → Route changes → Page title displays → "กำลังพัฒนา/Under Development" message shown
-- **Success criteria**: Each route renders correctly; page titles display in current language; no broken links or 404 errors
+- **Progression**: Click nav item → Route changes → Page renders with full functionality or placeholder
+- **Success criteria**: Dashboard shows real-time KPIs; all routes render correctly; page titles display in bilingual format; no broken links
 
 ### 6. Tracking Module with Visual Timeline
 - **Functionality**: View all jobs with current tracking status; drill down to detailed tracking timeline with 9 workflow steps; visual progress indicator
@@ -84,12 +84,33 @@ A comprehensive bilingual (Thai/English) logistics management web application fo
 - **Progression**: Status update to step 9 → Query all workflow photos → Set deleteAt = now + 30 days → Query all document photos → Set deleteAt = now + 90 days → Save paymentReceivedDate
 - **Success criteria**: Firestore TTL deletes expired photo documents; Cloud Function triggers on document deletion; Storage file deleted; deletion logged
 
-### 11. Cloud Function Photo Cleanup
-- **Functionality**: Firebase Cloud Function triggered when photo document deleted by TTL; deletes corresponding Storage file; logs deletion
-- **Purpose**: Ensure Storage and Firestore stay in sync; prevent orphaned files; maintain audit trail
-- **Trigger**: Firestore photo document deleted (by TTL or manual)
-- **Progression**: Document deleted → Function triggered → Read storagePath → Delete file from Storage → Write deletion log → Complete
-- **Success criteria**: Function executes within 10 seconds; Storage file deleted successfully; deletion logged with reason/timestamp; errors logged for troubleshooting
+### 12. Dashboard with Real-Time KPIs
+- **Functionality**: Display key performance indicators: total jobs this month, outstanding balance, active vehicles count, pending invoices; show recent jobs table with status badges
+- **Purpose**: Provide at-a-glance overview of business operations; quick access to critical metrics
+- **Trigger**: User logs in or navigates to dashboard
+- **Progression**: Dashboard loads → KPIs calculated from current data → Cards display with icons → Recent jobs table populated
+- **Success criteria**: KPIs update in real-time; numbers accurate; empty state shows when no data; responsive on mobile
+
+### 13. Bilingual Navigation Labels
+- **Functionality**: All navigation items show both Thai and English labels in parentheses format (e.g., "หน้าหลัก (Dashboard)")
+- **Purpose**: Help users understand terminology in both languages; improve accessibility for bilingual teams
+- **Trigger**: Navigation renders
+- **Progression**: Primary language shown first → Secondary language in parentheses → Toggle switches language priority
+- **Success criteria**: All nav items show both languages; labels fit in sidebar width; consistent format throughout
+
+### 14. Complete Master Data Management
+- **Functionality**: Six sub-modules: Vehicles, Drivers, Customers, Routes (distance, origin, destination tracking), Rates, Parts - all with full CRUD operations
+- **Purpose**: Centralize all reference data management; enable routes and distance tracking for job planning
+- **Trigger**: Navigate to Master Data section and select tab
+- **Progression**: Tab selected → Data table loads → Add/Edit/Delete operations available → Validation applied
+- **Success criteria**: All CRUD operations work; Routes module tracks distances; data persists correctly; bilingual labels throughout
+
+### 15. User Management (Admin)
+- **Functionality**: Admin-only access to manage users; assign roles (admin/manager/ops/finance/sales); activate/deactivate accounts
+- **Purpose**: Control system access; manage team permissions; track user creation dates
+- **Trigger**: Admin user navigates to Settings > User Management
+- **Progression**: User list loads → Add/edit user → Assign role → Set active status → Save
+- **Success criteria**: Only admins see menu; all roles selectable; users can be activated/deactivated; changes persist
 
 ## Edge Case Handling
 

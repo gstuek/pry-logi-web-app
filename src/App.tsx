@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { Toaster } from '@/components/ui/sonner';
 import LoginPage from '@/components/pages/LoginPage';
+import DashboardPage from '@/components/pages/DashboardPage';
 import PlaceholderPage from '@/components/pages/PlaceholderPage';
 import MasterDataPage from '@/components/pages/masterdata/MasterDataPage';
 import JobsPage from '@/components/pages/jobs/JobsPage';
@@ -56,7 +57,7 @@ function App() {
 
     switch (currentPath) {
       case '/dashboard':
-        return <PlaceholderPage titleKey="dashboard" />;
+        return <DashboardPage />;
       case '/jobs':
         return <JobsPage />;
       case '/tracking':
@@ -71,10 +72,10 @@ function App() {
         return user.role === 'admin' ? (
           <AdminPage />
         ) : (
-          <PlaceholderPage titleKey="dashboard" />
+          <DashboardPage />
         );
       default:
-        return <PlaceholderPage titleKey="dashboard" />;
+        return <DashboardPage />;
     }
   };
 
